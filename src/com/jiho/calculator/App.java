@@ -24,6 +24,8 @@ public class App {
             int result = cal.calculate(n1, n2, operator);
             System.out.println("결과: " + result);
 
+            System.out.println("계산 기록 " + cal.getSave());
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시만 종료)");
             String choose = sc.next();
             if (choose.equals("exit")){

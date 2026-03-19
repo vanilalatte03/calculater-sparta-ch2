@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-    final List<Integer> save = new ArrayList<>();
+    private final List<Integer> save = new ArrayList<>();
 
+    int result = 0;
     //계산 메서드
     public int calculate(int n1, int n2, char operator){
-        int result = 0;
 
         switch (operator) {
             case '+' :
@@ -37,4 +37,15 @@ public class Calculator {
         // System.out.println(save); 값 저장 확인용
         return result;
     }
+
+    public List<Integer> getSave(){
+        return save;
+    }
+
+    public void setSave(List<Integer> save){
+        save.add(result);
+    }
+
+
+
 }
