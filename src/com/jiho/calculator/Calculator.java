@@ -42,8 +42,9 @@ public class Calculator {
         return save;
     }
 
-    public void setSave(List<Integer> save){
-        save.add(result);
+    //계산 기록 수정
+    public void setSave(int index, int num){
+        save.set(index, num);
     }
 
 

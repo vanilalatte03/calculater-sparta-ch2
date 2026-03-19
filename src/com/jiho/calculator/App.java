@@ -24,7 +24,20 @@ public class App {
             int result = cal.calculate(n1, n2, operator);
             System.out.println("결과: " + result);
 
+            //계산 기록 조회 (getter)
             System.out.println("계산 기록 " + cal.getSave());
+
+            //계산 기록 수정 (setter)
+            System.out.println("계산 기록을 수정하시겠습니까? (y/n))");
+            String s1 = sc.next();
+            if(s1.equals("y")){
+                System.out.println("계산 기록 " + cal.getSave());
+                System.out.println("수정할 순번을 선택해주세요");
+                int index = sc.nextInt();
+                System.out.println("바꿀 번호를 입력해주세요");
+                int num = sc.nextInt();
+                cal.setSave(index, num);
+            }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시만 종료)");
             String choose = sc.next();
