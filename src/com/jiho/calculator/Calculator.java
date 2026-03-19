@@ -38,6 +38,10 @@ public class Calculator {
         return result;
     }
 
+    public void removeFirstResult(){
+        save.removeFirst();
+    }
+
     public List<Integer> getSave(){
         return save;
     }

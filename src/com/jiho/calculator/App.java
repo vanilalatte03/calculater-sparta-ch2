@@ -39,6 +39,13 @@ public class App {
                 cal.setSave(index, num);
             }
 
+            //첫 번째 계산 기록 삭제
+            System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까?");
+            String s2 = sc.next();
+            if(s2.equals("y")){
+                cal.removeFirstResult();
+            }
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시만 종료)");
             String choose = sc.next();
             if (choose.equals("exit")){
