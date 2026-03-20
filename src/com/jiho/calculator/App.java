@@ -5,18 +5,18 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArithmeticCalculator<Double> cal = new ArithmeticCalculator();
+        ArithmeticCalculator<Double> cal = new ArithmeticCalculator<>();
 
         //종료 조건
         boolean running = true;
 
         while (running) {
             System.out.println("첫 번째 숫자를 입력하세요.");
-            double n1 = sc.nextInt();
+            double n1 = sc.nextDouble();
             System.out.println("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0);
             System.out.println("두 번째 숫자를 입력하세요.");
-            double n2 = sc.nextInt();
+            double n2 = sc.nextDouble();
 
             //계산 메서드 호출
             double result = cal.calculate(n1, n2, operator);
@@ -33,9 +33,14 @@ public class App {
                 System.out.println("수정할 순번을 선택해주세요");
                 int index = sc.nextInt();
                 System.out.println("바꿀 번호를 입력해주세요");
-                double num = sc.nextInt();
+                double num = sc.nextDouble();
                 cal.setSave(index - 1, num);
             }
+
+            //입력값보다 큰 결과값 출력
+            System.out.println("값을 입력해주세요. 더 큰 결과값만 출력됩니다.");
+            double value = sc.nextDouble();
+            System.out.println("입력값보다 큰 결과: " + cal.getLargeResult(value));
 
             //첫 번째 계산 기록 삭제
             System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까? (y/n)");
