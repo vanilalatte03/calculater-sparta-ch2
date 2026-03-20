@@ -8,11 +8,15 @@ public class ArithmeticCalculator<T extends Number> {
     //계산 메서드
     public double calculate(T n1, T n2, char operator){
 
+        double result = 0.0;
         //enum을 통한 사칙연산
-        OperatorType op = OperatorType.findSymbol(operator);
-        double result = op.apply(n1.doubleValue(), n2.doubleValue());
-
-        save.add(result);
+        try {
+            OperatorType op = OperatorType.findSymbol(operator);
+            result = op.apply(n1.doubleValue(), n2.doubleValue());
+            save.add(result);
+        } catch (ArithmeticException | IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
         return result;
     }
 
