@@ -18,7 +18,11 @@ public enum OperatorType {
     },
     DIVIDE("/"){
         public double apply(double x, double y){
-            return x / y;
+            if (y == 0) {
+                throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            } else {
+                return x / y;
+            }
         }
     };
 
