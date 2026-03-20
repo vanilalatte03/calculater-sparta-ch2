@@ -5,18 +5,18 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArithmeticCalculator cal = new ArithmeticCalculator();
+        ArithmeticCalculator<Double> cal = new ArithmeticCalculator();
 
         //종료 조건
         boolean running = true;
 
         while (running) {
             System.out.println("첫 번째 숫자를 입력하세요.");
-            int n1 = sc.nextInt();
+            double n1 = sc.nextInt();
             System.out.println("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0);
             System.out.println("두 번째 숫자를 입력하세요.");
-            int n2 = sc.nextInt();
+            double n2 = sc.nextInt();
 
             //계산 메서드 호출
             double result = cal.calculate(n1, n2, operator);
