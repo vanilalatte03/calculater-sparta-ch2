@@ -35,17 +35,12 @@ public enum OperatorType {
     }
 
     public static OperatorType findSymbol(char operator) {
-        switch (operator) {
-            case '+':
-                return PLUS;
-            case '-':
-                return MINUS;
-            case '*':
-                return MULTI;
-            case '/':
-                return DIVIDE;
-            default:
-                throw new IllegalArgumentException("지원하지 않는 연산자입니다: " + operator);
-        }
+        return switch (operator) {
+            case '+' -> PLUS;
+            case '-' -> MINUS;
+            case '*' -> MULTI;
+            case '/' -> DIVIDE;
+            default -> throw new IllegalArgumentException("지원하지 않는 연산자입니다");
+        };
     }
 }
