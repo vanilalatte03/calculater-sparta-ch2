@@ -34,6 +34,7 @@ public enum OperatorType {
 
     public abstract double apply(double x, double y);
 
+    //없어도 될듯? (삭제 보류)
     public String getSymbol() {
         return symbol;
     }

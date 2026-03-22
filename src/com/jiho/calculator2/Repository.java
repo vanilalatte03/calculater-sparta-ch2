@@ -7,14 +7,17 @@ import java.util.List;
 public class Repository {
     private final List<Double> results = new ArrayList<>();
 
+    //저장
     public void save(double result) {
-        this.results.add(result);
+        results.add(result);
     }
 
+    //첫번째 기록 삭제
     public void removeFirstResult(){
         results.removeFirst();
     }
 
+    //기록 반환
     public List<Double> getResults(){
         return results;
     }
@@ -24,6 +27,7 @@ public class Repository {
         results.set(index, num);
     }
 
+    //입력값보다 큰 숫자 반환
     public List<Double> getLargeResult(double num){
         return results.stream()
                 .filter(value -> value > num)
