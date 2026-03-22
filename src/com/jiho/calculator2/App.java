@@ -1,12 +1,12 @@
-package com.jiho.calculator;
+package com.jiho.calculator2;
 
-import java.util.*;
-//계산기 도전과제까지
+import java.util.Scanner;
+//추가 도전
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArithmeticCalculator<Double> cal = new ArithmeticCalculator<>();
-
+        Repository repository = new Repository();
         //종료 조건
         boolean running = true;
 
@@ -23,30 +23,30 @@ public class App {
             System.out.println("결과: " + result);
 
             //계산 기록 조회 (getter)
-            System.out.println("계산 기록 " + cal.getSave());
+            System.out.println("계산 기록 " + repository.getResults());
 
             //계산 기록 수정 (setter)
             System.out.println("계산 기록을 수정하시겠습니까? (y/n))");
             String s1 = sc.next();
             if(s1.equals("y")){
-                System.out.println("계산 기록 " + cal.getSave());
+                System.out.println("계산 기록 " + repository.getResults());
                 System.out.println("수정할 순번을 선택해주세요");
                 int index = sc.nextInt();
                 System.out.println("바꿀 번호를 입력해주세요");
                 double num = sc.nextDouble();
-                cal.setSave(index - 1, num);
+                repository.setSave(index - 1, num);
             }
 
             //입력값보다 큰 결과값 출력
             System.out.println("값을 입력해주세요. 더 큰 결과값만 출력됩니다.");
             double value = sc.nextDouble();
-            System.out.println("입력값보다 큰 결과: " + cal.getLargeResult(value));
+            System.out.println("입력값보다 큰 결과: " + repository.getLargeResult(value));
 
             //첫 번째 계산 기록 삭제
             System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까? (y/n)");
             String s2 = sc.next();
             if(s2.equals("y")){
-                cal.removeFirstResult();
+                repository.removeFirstResult();
             }
 
             System.out.println("더 계산하시겠습니까? (y/exit)");
