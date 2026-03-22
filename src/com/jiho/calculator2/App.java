@@ -18,34 +18,14 @@ public class App {
         boolean running = true;
 
         while (running) {
-            System.out.println("숫자를 입력하세요.");
-            double result = sc.nextDouble();
+            //계산기
+            double finalResult = Calculator();
 
-            while(true){
-                System.out.println("사칙연산 기호나 =를 입력하세요.");
-                char operator = sc.next().charAt(0);
-
-                //등호가 나오면 반복문 종료
-                if (operator == '='){
-                    break;
-                }
-
-                System.out.println("숫자를 입력하세요.");
-                double num = sc.nextDouble();
-
-                //계산 메서드 호출
-                try {
-                    result = cal.calculate(result, num, operator);
-                } catch (ArithmeticException | IllegalArgumentException e){
-                    System.out.println(e.getMessage());
-                }
-            }
-
-            System.out.println("계산 결과: " + result);
-            repository.save(result);
+            System.out.println("계산 결과: " + finalResult);
+            repository.save(finalResult);
 
             //계산 기록
-            history();
+            manageHistory();
 
             System.out.println("더 계산하시겠습니까? (y/exit)");
             String choose = sc.next();
@@ -55,12 +35,44 @@ public class App {
         }
     }
 
-    //계산 기록 관련 메서드
-    public void history() {
-        //계산 기록 조회
+    //계산기
+    private double Calculator() {
+        System.out.println("숫자를 입력하세요.");
+        double result = sc.nextDouble();
+
+        while(true){
+            System.out.println("사칙연산 기호나 =를 입력하세요.");
+            char operator = sc.next().charAt(0);
+
+            //등호가 나오면 반복문 종료
+            if (operator == '='){
+                break;
+            }
+
+            System.out.println("숫자를 입력하세요.");
+            double num = sc.nextDouble();
+
+            //계산 메서드 호출
+            try {
+                result = cal.calculate(result, num, operator);
+            } catch (ArithmeticException | IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    //계산 기록 촐괄 메서드
+    private void manageHistory() {
         System.out.println("계산 기록 " + repository.getResults());
 
-        //계산 기록 수정
+        editHistory();
+        printLargeHistory();
+        deleteFirstHistory();
+    }
+
+    //계산 기록 수정
+    private void editHistory(){
         System.out.println("계산 기록을 수정하시겠습니까? (y/n))");
         String s1 = sc.next();
         if(s1.equals("y")){
@@ -71,18 +83,25 @@ public class App {
             double num = sc.nextDouble();
             repository.setSave(index - 1, num);
         }
+    }
 
-        //입력값보다 큰 결과값 출력
+    //입력값보다 큰 결과값 출력
+    private void printLargeHistory() {
         System.out.println("값을 입력해주세요. 더 큰 결과값만 출력됩니다.");
         double value = sc.nextDouble();
         System.out.println("입력값보다 큰 결과: " + repository.getLargeResult(value));
 
-        //첫 번째 계산 기록 삭제
+    }
+
+    //첫 번째 계산 기록 삭제
+    private void deleteFirstHistory() {
         System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까? (y/n)");
         String s2 = sc.next();
         if(s2.equals("y")){
             repository.removeFirstResult();
         }
-
     }
+
+
+
 }
