@@ -1,8 +1,5 @@
 package com.jiho.calculator2;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ArithmeticCalculator<T extends Number> {
     //계산 메서드
     public double calculate(T n1, T n2, char operator){
