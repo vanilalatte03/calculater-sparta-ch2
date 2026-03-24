@@ -1,10 +1,9 @@
 package com.jiho.calculator2;
 
-public class ArithmeticCalculator<T extends Number> {
+public class ArithmeticCalculator {
     //계산 메서드
-    public double calculate(T n1, T n2, char operator){
-        //enum을 통한 사칙연산
+    public double calculate(double n1, double n2, char operator){
         OperatorType op = OperatorType.findSymbol(operator);
-        return op.apply(n1.doubleValue(), n2.doubleValue());
+        return op.apply(n1, n2);
     }
 }

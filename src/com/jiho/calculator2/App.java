@@ -1,15 +1,14 @@
 package com.jiho.calculator2;
 
-import java.util.Scanner;
-//추가 도전
 public class App {
-    private final Scanner sc = new Scanner(System.in);
-    private final ArithmeticCalculator<Double> cal = new ArithmeticCalculator<>();
-    private final Repository repository = new Repository();
+    private final ArithmeticCalculator cal;
+    private final Repository repository;
+    private final InputConsole inputConsole;
 
-    //프로그램 시작
-    public static void main(String[] args) {
-        new App().run();
+    public App(ArithmeticCalculator cal, Repository repository, InputConsole inputConsole) {
+        this.cal = cal;
+        this.repository = repository;
+        this.inputConsole = inputConsole;
     }
 
     //실행 부분
@@ -19,39 +18,31 @@ public class App {
 
         while (running) {
             //계산기
-            double finalResult = Calculator();
+            double finalResult = calculator();
 
             System.out.println("계산 결과: " + finalResult);
             repository.save(finalResult);
 
             //계산 기록
             manageHistory();
-
-            System.out.println("더 계산하시겠습니까? (y/exit)");
-            String choose = sc.next();
+            String choose = inputConsole.readContinue();
             if (choose.equals("exit")){
                 running = false;
             }
         }
     }
 
-    //계산기
-    private double Calculator() {
-        System.out.println("숫자를 입력하세요.");
-        double result = sc.nextDouble();
-
+    //계산기 입력
+    private double calculator() {
+        double result = inputConsole.readNumber();
         while(true){
-            System.out.println("사칙연산 기호나 =를 입력하세요.");
-            char operator = sc.next().charAt(0);
-
+            char operator = inputConsole.readOperator();
             //등호가 나오면 반복문 종료
             if (operator == '='){
                 break;
             }
 
-            System.out.println("숫자를 입력하세요.");
-            double num = sc.nextDouble();
-
+            double num = inputConsole.readNumber();
             //계산 메서드 호출
             try {
                 result = cal.calculate(result, num, operator);
@@ -62,7 +53,7 @@ public class App {
         return result;
     }
 
-    //계산 기록 촐괄 메서드
+    //계산 기록 총괄 메서드
     private void manageHistory() {
         System.out.println("계산 기록 " + repository.getResults());
 
@@ -73,35 +64,26 @@ public class App {
 
     //계산 기록 수정
     private void editHistory(){
-        System.out.println("계산 기록을 수정하시겠습니까? (y/n))");
-        String s1 = sc.next();
-        if(s1.equals("y")){
+        String choose = inputConsole.readEdit();
+        if(choose.equals("y")){
             System.out.println("계산 기록 " + repository.getResults());
-            System.out.println("수정할 순번을 선택해주세요");
-            int index = sc.nextInt();
-            System.out.println("바꿀 번호를 입력해주세요");
-            double num = sc.nextDouble();
-            repository.setSave(index - 1, num);
+            int index = inputConsole.readHistoryIndex();
+            double value = inputConsole.readHistoryValue();
+            repository.updateAt(index - 1, value);
         }
     }
 
     //입력값보다 큰 결과값 출력
     private void printLargeHistory() {
-        System.out.println("값을 입력해주세요. 더 큰 결과값만 출력됩니다.");
-        double value = sc.nextDouble();
+        double value = inputConsole.readLargeValue();
         System.out.println("입력값보다 큰 결과: " + repository.getLargeResult(value));
-
     }
 
     //첫 번째 계산 기록 삭제
     private void deleteFirstHistory() {
-        System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까? (y/n)");
-        String s2 = sc.next();
-        if(s2.equals("y")){
+        String value = inputConsole.readDeleteFirstValue();
+        if(value.equals("y")){
             repository.removeFirstResult();
         }
     }
-
-
-
 }

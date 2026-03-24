@@ -20,11 +20,12 @@ public class Repository {
     //기록 반환
     public List<Double> getResults(){
         return results;
+
     }
 
     //계산 기록 수정
-    public void setSave(int index, Double num){
-        results.set(index, num);
+    public void updateAt(int index, double value) {
+        results.set(index, value);
     }
 
     //입력값보다 큰 숫자 반환
