@@ -19,8 +19,7 @@ public class Repository {
 
     //기록 반환
     public List<Double> getResults(){
-        return results;
-
+        return new ArrayList<>(results);
     }
 
     //계산 기록 수정
