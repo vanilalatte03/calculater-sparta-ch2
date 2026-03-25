@@ -8,9 +8,8 @@ public class Main {
         Repository repository = new Repository();
         Scanner sc = new Scanner(System.in);
         InputConsole inputConsole = new InputConsole(sc);
-        HistoryManager historyManager = new HistoryManager(repository, inputConsole);
 
-        App app = new App(calculator, historyManager, inputConsole);
+        App app = new App(calculator, repository, inputConsole);
         app.run();
     }
 }
