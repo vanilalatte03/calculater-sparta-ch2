@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArithmeticCalculator calculator = new ArithmeticCalculator();
         Repository repository = new Repository();
+        ArithmeticCalculator calculator = new ArithmeticCalculator(repository);
         Scanner sc = new Scanner(System.in);
-        InputConsole inputConsole = new InputConsole(sc);
+        InputConsole inputConsole = new InputConsole(sc, repository);
 
-        App app = new App(calculator, repository, inputConsole);
+        App app = new App(calculator, inputConsole);
         app.run();
     }
 }

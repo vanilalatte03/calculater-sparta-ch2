@@ -4,14 +4,20 @@ import java.util.Scanner;
 
 public class InputConsole {
     private final Scanner sc;
+    private final Repository repository;
 
-    public InputConsole(Scanner sc) {
+    public InputConsole(Scanner sc, Repository repository) {
         this.sc = sc;
+        this.repository = repository;
     }
 
     public String readToken() {
         System.out.println("숫자, 사칙연산 기호, = 중 하나를 입력하세요.");
-        return sc.nextLine();
+        String token = sc.nextLine();
+        if(!token.equals("=")){
+            repository.save(token);
+        }
+        return token;
     }
 
     public String readContinue() {
